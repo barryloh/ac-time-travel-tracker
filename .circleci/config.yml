@@ -24,8 +24,9 @@ commands:
       - run: yarn test
   deploy-firebase:
     parameters:
-      - firebase-project:
+      firebase-project:
         type: string
+        default: '$FIREBASE_PROJECT'
     steps:
       - run:
           name: Deploy to Firebase
