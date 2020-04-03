@@ -30,7 +30,7 @@ commands:
     steps:
       - run:
           name: Deploy to Firebase
-          command: ./node_modules/.bin/firebase deploy --token "$FIREBASE_TOKEN" --project "<< parameters.firebase-project >>"
+          command: ./node_modules/.bin/firebase deploy --token "$FIREBASE_CI_TOKEN" --project "<< parameters.firebase-project >>"
 
 jobs:
   build:
