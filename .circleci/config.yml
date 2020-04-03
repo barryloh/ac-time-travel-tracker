@@ -1,24 +1,21 @@
-version: 2
-jobs:
-  build:
-    docker:
-      - image: circleci/node:12.9.1-browsers
+version: 2.1
 
-    working_directory: ~/repo
+commands:
+  build-app:
     steps:
       - checkout
 
       - restore_cache:
-        keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          - v1-dependencies-
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
 
       - run: yarn install
 
       - save_cache:
-        paths:
-          - './node_modules'
-        key: v1-dependencies-{{ checksum "package.json" }}
+          paths:
+            - './node_modules'
+          key: v1-dependencies-{{ checksum "package.json" }}
 
       - run: yarn lint
 
@@ -26,39 +23,23 @@ jobs:
 
       - run: yarn test
 
+jobs:
+  build:
+    docker:
+      - image: circleci/node:12.9.1-browsers
+
+    working_directory: ~/repo
+    steps:
+      - build-app
+
   deploy_dev:
     docker:
       - image: circleci/node:12.9.1-browsers
 
     working_directory: ~/repo
     steps:
-      - checkout
+      - build-app
 
-      - restore_cache:
-        keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          - v1-dependencies-
-
-      - run:
-          name: Install Dependencies
-          command: yarn install
-
-      - save_cache:
-        paths:
-          - './node_modules'
-        key: v1-dependencies-{{ checksum "package.json" }}
-
-      - run:
-          name: ESLint checking..
-          command: yarn lint
-
-      - run:
-          name: App Size checking..
-          command: yarn size
-
-      - run:
-          name: Running tests..
-          command: yarn test
 workflows:
   version: 2
   build_deploy_dev:
