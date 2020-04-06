@@ -51,7 +51,8 @@ jobs:
     working_directory: ~/repo
     steps:
       - build-app
-      - codecov/upload
+      - codecov/upload:
+          file: './coverage'
       - deploy-firebase:
           firebase-project: $FIREBASE_PROJECT_DEV
 
