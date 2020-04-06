@@ -32,6 +32,9 @@ commands:
           name: Deploy to Firebase
           command: ./node_modules/.bin/firebase deploy --token "$FIREBASE_CI_TOKEN" --project "<< parameters.firebase-project >>"
 
+orbs:
+  codecov: codecov/codecov@1.0.2
+
 jobs:
   build:
     docker:
@@ -48,6 +51,7 @@ jobs:
     working_directory: ~/repo
     steps:
       - build-app
+      - codecov/upload
       - deploy-firebase:
           firebase-project: $FIREBASE_PROJECT_DEV
 

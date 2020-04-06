@@ -36,3 +36,44 @@
     transform: rotate(360deg);
   }
 }
+
+.ac-app .ant-layout-header {
+  position: sticky;
+  top: 0px;
+  padding: 0px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px;
+  z-index: 10;
+}
+
+.ac-app .ant-layout-content {
+  padding-top: 16px;
+}
+
+.calendar {
+  padding: 0px;
+}
+
+.calendar .calendar-header {
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.calendar .months-container .month-container {
+  height: 220px;
+}
+
+.month-container {
+  margin-top: 12px;
+}
+
+.calendar table td.day {
+  border-radius: 15px;
+}
+
+.calendar table.month td.day .day-content {
+  border-radius: 15px;
+}
+
+.calendar table.month td.range.range-start .day-content,
+.calendar table.month td.range.range-end .day-content {
+  border-radius: 15px;
+}
